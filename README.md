@@ -8,6 +8,7 @@ Welcome to my Data Analyst portfolio! This repository showcases my data analysis
 2. 🛒 **Sales Data Analysis (SQL)** – [View project](./sql-analysis/)
 3. 🧑‍💼 **HR Analytics (Python)** – [View project](./pyhton-analysis/)
 
+
 ## 🛠️ Tools Used
 
 - Microsoft Excel
