@@ -6,17 +6,18 @@ This project uses Python to perform an exploratory data analysis (EDA) on IBM’
 
 ## 📊 Key Insights
 
-- Work-Life Balance has a strong correlation with attrition.
-- Employees with longer working hours and low satisfaction are more likely to leave.
-- Younger employees tend to have higher attrition rates.
+-Focus on the factors with the highest importance, such as compensation, working hours, and work environment.
+-Pay attention to employees with short tenure or high performance who are at risk of leaving.
+-Implement career development and engagement programs for departments prone to high turnover.
+-Evaluate flexible work policies or work-life balance initiatives to improve retention.
 
 ## 🛠️ Tools Used
 
 - Python
-- pandas, seaborn, matplotlib
-- Jupyter Notebook / Google Colab
+- Jupyter Notebook
 
 ## 📁 Files
 
-- `hr-analysis.ipynb`: Jupyter Notebook with full analysis
-- `WA_Fn-UseC_-HR-Employee-Attrition.csv`: Original dataset (in `/data` folder)
+- Employee Attrition.ipynb: Jupyter Notebook with full analysis
+- WA_Fn-UseC_-HR-Employee-Attrition.csv: Original dataset
+
