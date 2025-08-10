@@ -8,6 +8,7 @@ Welcome to my Data Analyst portfolio! This repository showcases my data analysis
 2. **Sales Data Analysis (SQL)** – [View project](./data-analyst-portfolio/sql-analysis)
 3. **HR Analytics (Python)** – [View project](./data-analyst-portfolio/python-analysis)
 4. **Dashboard (Looker Studio)** - https://lookerstudio.google.com/reporting/3c187da9-882d-43de-8d3f-2a38211a67b1
+5. **Alert monitoring (Pyhton&TeleBot)** – [View project](./data-analyst-portfolio/alert)
 
 ## Tools Used
 
