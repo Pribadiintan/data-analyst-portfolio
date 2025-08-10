@@ -15,7 +15,7 @@ Welcome to my Data Analyst portfolio! This repository showcases my data analysis
 - SQL (SQLite)
 - Python (Jupyter Notebook, pandas, seaborn, matplotlib)
 
-## 📊 Summary
+## Summary
 
 This portfolio demonstrates:
 - Data cleaning and wrangling
