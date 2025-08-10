@@ -1,0 +1,201 @@
+{
+  "name": "HR Attrition Dashboard - Template",
+  "dataSources": [
+    {
+      "dataSourceId": "predictions",
+      "type": "SHEET",
+      "name": "predictions",
+      "fields": [
+        {"name":"EmployeeID","type":"NUMBER"},
+        {"name":"Attrition_Actual","type":"NUMBER"},
+        {"name":"Attrition_Predicted","type":"NUMBER"},
+        {"name":"Prediction_Probability","type":"NUMBER"},
+        {"name":"Age","type":"NUMBER"},
+        {"name":"Department","type":"TEXT"},
+        {"name":"JobRole","type":"TEXT"},
+        {"name":"Education","type":"TEXT"}
+      ]
+    }
+  ],
+  "layout": {
+    "paperSize": {"width": 1200, "height": 800},
+    "theme": {
+      "primaryColor": "#0b57a4",
+      "secondaryColor": "#ffffff",
+      "accentColor": "#00a99d",
+      "fontFamily": "Roboto"
+    }
+  },
+  "pages": [
+    {
+      "name": "Summary",
+      "id": "page_summary",
+      "components": [
+        {
+          "type": "HEADER",
+          "id": "header1",
+          "x": 0,
+          "y": 0,
+          "width": 1200,
+          "height": 80,
+          "style": {
+            "backgroundColor": "#0b57a4",
+            "color": "#ffffff",
+            "fontSize": 22,
+            "textAlign": "left",
+            "padding": 16
+          },
+          "text": "HR Attrition Dashboard"
+        },
+        {
+          "type": "SCORECARD",
+          "id": "kpi_auc",
+          "x": 24,
+          "y": 100,
+          "width": 320,
+          "height": 110,
+          "dataSourceId": "predictions",
+          "metric": {
+            "aggregation": "MAX",
+            "field": "AUC",
+            "note": "Set AUC manually in data source or model_results.csv"
+          },
+          "title": "AUC (Best Model)",
+          "style": {"backgroundColor": "#ffffff", "borderColor": "#e6eef7"}
+        },
+        {
+          "type": "SCORECARD",
+          "id": "kpi_accuracy",
+          "x": 360,
+          "y": 100,
+          "width": 320,
+          "height": 110,
+          "dataSourceId": "predictions",
+          "metric": {
+            "aggregation": "MAX",
+            "field": "Accuracy",
+            "note": "Set Accuracy manually in data source if available"
+          },
+          "title": "Accuracy",
+          "style": {"backgroundColor": "#ffffff", "borderColor": "#e6eef7"}
+        },
+        {
+          "type": "SCORECARD",
+          "id": "kpi_highrisk",
+          "x": 696,
+          "y": 100,
+          "width": 320,
+          "height": 110,
+          "dataSourceId": "predictions",
+          "metric": {
+            "aggregation": "COUNT",
+            "filter": {
+              "expression": "Prediction_Probability >= 0.7 AND Attrition_Predicted = 1"
+            },
+            "field": "EmployeeID"
+          },
+          "title": "High-Risk Employees (prob >= 0.7)",
+          "style": {"backgroundColor": "#ffffff", "borderColor": "#e6eef7"}
+        },
+        {
+          "type": "PIE_CHART",
+          "id": "pie_actual",
+          "x": 24,
+          "y": 230,
+          "width": 360,
+          "height": 320,
+          "dataSourceId": "predictions",
+          "dimension": "Attrition_Actual",
+          "metric": {"aggregation": "COUNT", "field": "EmployeeID"},
+          "title": "Attrition (Actual)",
+          "style": {"legendPosition": "BOTTOM", "showPercent": true}
+        },
+        {
+          "type": "PIE_CHART",
+          "id": "pie_predicted",
+          "x": 404,
+          "y": 230,
+          "width": 360,
+          "height": 320,
+          "dataSourceId": "predictions",
+          "dimension": "Attrition_Predicted",
+          "metric": {"aggregation": "COUNT", "field": "EmployeeID"},
+          "title": "Attrition (Predicted)",
+          "style": {"legendPosition": "BOTTOM", "showPercent": true}
+        },
+        {
+          "type": "BAR_CHART",
+          "id": "bar_prob_buckets",
+          "x": 784,
+          "y": 230,
+          "width": 380,
+          "height": 320,
+          "dataSourceId": "predictions",
+          "dimension": {
+            "calculatedField": "ProbabilityBucket",
+            "formula": "CASE WHEN Prediction_Probability < 0.2 THEN '0-0.2' WHEN Prediction_Probability < 0.4 THEN '0.2-0.4' WHEN Prediction_Probability < 0.6 THEN '0.4-0.6' WHEN Prediction_Probability < 0.8 THEN '0.6-0.8' ELSE '0.8-1.0' END"
+          },
+          "metric": {"aggregation": "COUNT", "field": "EmployeeID"},
+          "title": "Prediction Probability Buckets",
+          "style": {"orientation": "VERTICAL"}
+        },
+        {
+          "type": "TABLE",
+          "id": "table_highrisk",
+          "x": 24,
+          "y": 570,
+          "width": 1140,
+          "height": 300,
+          "dataSourceId": "predictions",
+          "columns": [
+            {"field": "EmployeeID"},
+            {"field": "Department"},
+            {"field": "JobRole"},
+            {"field": "Attrition_Actual"},
+            {"field": "Attrition_Predicted"},
+            {"field": "Prediction_Probability"}
+          ],
+          "sort": {"field": "Prediction_Probability", "direction": "DESC"},
+          "title": "Top Risk Employees",
+          "style": {"rowStripe": true}
+        },
+        {
+          "type": "FILTER_CONTROL",
+          "id": "filter_dept",
+          "x": 24,
+          "y": 880,
+          "width": 320,
+          "height": 40,
+          "dataSourceId": "predictions",
+          "field": "Department",
+          "controlType": "DROP_DOWN",
+          "title": "Filter: Department"
+        },
+        {
+          "type": "FILTER_CONTROL",
+          "id": "filter_jobrole",
+          "x": 360,
+          "y": 880,
+          "width": 320,
+          "height": 40,
+          "dataSourceId": "predictions",
+          "field": "JobRole",
+          "controlType": "DROP_DOWN",
+          "title": "Filter: JobRole"
+        },
+        {
+          "type": "FILTER_CONTROL",
+          "id": "filter_education",
+          "x": 696,
+          "y": 880,
+          "width": 320,
+          "height": 40,
+          "dataSourceId": "predictions",
+          "field": "Education",
+          "controlType": "DROP_DOWN",
+          "title": "Filter: Education"
+        }
+      ]
+    }
+  ]
+}
