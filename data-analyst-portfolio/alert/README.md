@@ -15,15 +15,7 @@ The script runs **once daily at 07:00 AM** server time via a scheduled job.
 ---
 
 ## Workflow Diagram
-    A[Start - 07:00 AM] --> B[Login to Payment Database]
-    B --> C[Fetch Payment Data]
-    C --> D[Login to Bank Statement Website]
-    D --> E[Fetch Bank Statement Data]
-    E --> F[Clean & Normalize Data]
-    F --> G[Compare Remarks Column]
-    G --> H[Generate TXT Report of Differences]
-    H --> I[Send Report to Telegram Bot]
-    I --> J[End]
+![Flow Process](https://raw.githubusercontent.com/<Pribadiintan>/data-analyst-portfolio/main/alert/Flow%20Process.png)
 
 ---
 
@@ -59,6 +51,7 @@ The script runs **once daily at 07:00 AM** server time via a scheduled job.
 Author: Intan Puspita Pribadi
 Category: Data Monitoring & Automation
 Tags: Python, Data Monitoring, Telegram Bot, Automation
+
 
 
 
