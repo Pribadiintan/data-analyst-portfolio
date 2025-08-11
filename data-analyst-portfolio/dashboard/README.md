@@ -18,18 +18,18 @@ The dataset contains sample sales transaction data, including:
 - **Customer Details**: Customer name, country, sales representative
 - **Financial Metrics**: Sales amount, quantity ordered, price per unit
 
-## 🔍 Project Objectives
+## Project Objectives
 1. **Clean the dataset** to ensure accuracy and consistency.
 2. **Analyze sales performance** across different dimensions (product lines, countries, time periods).
 3. **Visualize key metrics** using Looker Studio for better insights.
 
-## 🛠 Tools & Skills Used
+## Tools & Skills Used
 - **Google Looker Studio** – Interactive dashboard creation
 - **Google Sheets / Excel** – Data cleaning & preprocessing
 - **Data Visualization** – Charts
 - **Analytical Skills** – Identifying trends and patterns
 
-## 📈 Dashboard Insights
+## Dashboard Insights
 The dashboard provides:
 - **Total sales performance over time**
 - **Top performing products & countries**
@@ -37,7 +37,7 @@ The dashboard provides:
 - **Order status breakdown**
 - **Sales representative performance**
 
-## 🚀 How to Use
+## How to Use
 1. Open the [Looker Studio dashboard](https://lookerstudio.google.com/reporting/3c187da9-882d-43de-8d3f-2a38211a67b1).
 2. Use the interactive filters to view data by:
    - Year
@@ -45,7 +45,7 @@ The dashboard provides:
    - Country
    - Sales representative
 
-## 📌 Future Improvements
+## Future Improvements
 - Add calculated metrics for profit margin.
 - Create time-series forecasting for future sales.
 - Integrate with live data sources for real-time updates.
@@ -54,3 +54,4 @@ The dashboard provides:
 
 **Author**: Intan Puspita Pribadi  
 **Portfolio**: Data Analyst Projects
+
