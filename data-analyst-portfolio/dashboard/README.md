@@ -1,7 +1,6 @@
 # Sales Data Analysis Dashboard
 
-This project showcases a **Sales Data Analysis** using **Looker Studio** (formerly Google Data Studio), built from the sales_data_sample.csv dataset.  
-It is part of my **Data Analyst portfolio** to demonstrate skills in data cleaning, visualization, and dashboard design.
+This project showcases a **Sales Data Analysis** using **Looker Studio**, built from the sales_data_sample.csv dataset.  
 
 ## Dashboard Link
 You can explore the interactive dashboard here:  
@@ -54,4 +53,5 @@ The dashboard provides:
 
 **Author**: Intan Puspita Pribadi  
 **Portfolio**: Data Analyst Projects
+
 
