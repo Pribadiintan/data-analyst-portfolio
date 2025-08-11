@@ -16,7 +16,7 @@ The script runs **once daily at 07:00 AM** server time via a scheduled job.
 ---
 
 ## 📂 Workflow Diagram
-![Flow Process](https://raw.githubusercontent.com/Pribadiintan/data-analyst-portfolio/main/alert/Flow%20Process.png)
+![Flow Process](https://raw.githubusercontent.com/Pribadiintan/data-analyst-portfolio/main/data-analyst-portfolio/alert/Flow%20Process.png)
 
 ---
 
@@ -52,3 +52,4 @@ The script runs **once daily at 07:00 AM** server time via a scheduled job.
 **Author:** Intan Puspita Pribadi  
 **Category:** Data Monitoring & Automation  
 **Tags:** Python, Data Monitoring, Telegram Bot, Automation
+
