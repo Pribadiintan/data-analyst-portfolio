@@ -13,13 +13,14 @@ This project uses Python to perform an exploratory data analysis (EDA) on IBM’
 
 ## Tools Used
 
-- **Python**
-- **Jupyter Notebook**
+- Python
+- Jupyter Notebook
 
 ## Files
 
-- **Employee Attrition.ipynb: Jupyter Notebook with full analysis**
-- **WA_Fn-UseC_-HR-Employee-Attrition.csv: Original dataset**
+- Employee Attrition.ipynb: Jupyter Notebook with full analysis
+- WA_Fn-UseC_-HR-Employee-Attrition.csv: Original dataset
+
 
 
 
