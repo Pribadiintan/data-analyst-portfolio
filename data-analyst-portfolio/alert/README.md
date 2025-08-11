@@ -28,6 +28,7 @@ The script runs **once daily at 07:00 AM** server time via a scheduled job.
 ---
 
 ## Tools & Libraries Used
+
 Python (>= 3.8) – Main programming language
 pandas – Data cleaning, merging, and comparison
 requests – Sending reports to Telegram Bot
@@ -37,6 +38,7 @@ Cron Job / Task Scheduler – For automation
 ---
 
 ## Features
+
 Automated daily execution at 07:00 AM
 Compares two datasets using remarks column
 Generates a clear .txt report with mismatched records
@@ -46,6 +48,7 @@ Can be adapted to run manually when needed
 ---
 
 ## Future Improvements
+
 Automate login to bank statement website using API or secure web scraping
 Store results in a database for historical tracking
 Add email notifications as a backup alert method
@@ -56,6 +59,7 @@ Implement real-time monitoring instead of daily batch
 Author: Intan Puspita Pribadi
 Category: Data Monitoring & Automation
 Tags: Python, Data Monitoring, Telegram Bot, Automation
+
 
 
 
