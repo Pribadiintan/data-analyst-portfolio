@@ -8,15 +8,6 @@ You can explore the interactive dashboard here:
 
 ---
 
-## Dashboard Previews
-### Overview
-![Dashboard Overview](images/dashboard_overview.png)
-
-### Top Products & Countries
-![Top Products and Countries](images/top_products.png)
-
----
-
 ## Dataset
 The dataset used is located in:  
 `data-analyst-portfolio/data/sales_data_sample.csv`
@@ -74,3 +65,4 @@ The dashboard provides:
 
 **Author**: Intan Puspita Pribadi  
 **Portfolio**: Data Analyst Projects
+
