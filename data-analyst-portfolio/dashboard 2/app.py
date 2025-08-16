@@ -1,172 +1,44 @@
-{
- "cells": [
-  {
-   "cell_type": "code",
-   "execution_count": 1,
-   "id": "64c81d77",
-   "metadata": {},
-   "outputs": [
-    {
-     "ename": "ModuleNotFoundError",
-     "evalue": "No module named 'streamlit'",
-     "output_type": "error",
-     "traceback": [
-      "\u001b[1;31m---------------------------------------------------------------------------\u001b[0m",
-      "\u001b[1;31mModuleNotFoundError\u001b[0m                       Traceback (most recent call last)",
-      "Cell \u001b[1;32mIn[1], line 1\u001b[0m\n\u001b[1;32m----> 1\u001b[0m \u001b[38;5;28;01mimport\u001b[39;00m \u001b[38;5;21;01mstreamlit\u001b[39;00m \u001b[38;5;28;01mas\u001b[39;00m \u001b[38;5;21;01mst\u001b[39;00m\n\u001b[0;32m      2\u001b[0m \u001b[38;5;28;01mimport\u001b[39;00m \u001b[38;5;21;01mpandas\u001b[39;00m \u001b[38;5;28;01mas\u001b[39;00m \u001b[38;5;21;01mpd\u001b[39;00m\n\u001b[0;32m      3\u001b[0m \u001b[38;5;28;01mimport\u001b[39;00m \u001b[38;5;21;01mnumpy\u001b[39;00m \u001b[38;5;28;01mas\u001b[39;00m \u001b[38;5;21;01mnp\u001b[39;00m\n",
-      "\u001b[1;31mModuleNotFoundError\u001b[0m: No module named 'streamlit'"
-     ]
-    }
-   ],
-   "source": [
-    "import streamlit as st\n",
-    "import pandas as pd\n",
-    "import numpy as np\n",
-    "import matplotlib.pyplot as plt\n",
-    "import seaborn as sns\n",
-    "from sklearn.linear_model import LinearRegression\n",
-    "from sklearn.cluster import KMeans\n",
-    "from sklearn.model_selection import train_test_split\n",
-    "from sklearn.metrics import classification_report, confusion_matrix\n",
-    "from sklearn.ensemble import RandomForestClassifier\n",
-    "from sklearn.preprocessing import LabelEncoder, StandardScaler\n",
-    "\n",
-    "# ====================================\n",
-    "# 1. Judul Dashboard\n",
-    "# ====================================\n",
-    "st.title(\"📊 Customer Analytics Dashboard\")\n",
-    "st.markdown(\"EDA | Regression | Clustering | Classification dalam 1 aplikasi\")\n",
-    "\n",
-    "# ====================================\n",
-    "# 2. Upload Dataset\n",
-    "# ====================================\n",
-    "uploaded_file = st.file_uploader(\"📂 Upload dataset CSV (WA_Fn-UseC_-Telco-Customer-Churn)\", type=[\"csv\"])\n",
-    "\n",
-    "if uploaded_file:\n",
-    "    df = pd.read_csv(uploaded_file)\n",
-    "    st.write(\"### 🔎 Preview Data\")\n",
-    "    st.dataframe(df.head())\n",
-    "\n",
-    "    # Encode categorical (agar bisa dipakai model)\n",
-    "    df_encoded = df.copy()\n",
-    "    for col in df_encoded.select_dtypes(include=['object']).columns:\n",
-    "        df_encoded[col] = LabelEncoder().fit_transform(df_encoded[col].astype(str))\n",
-    "\n",
-    "    # ====================================\n",
-    "    # 3. Pilih Analisis\n",
-    "    # ====================================\n",
-    "    option = st.sidebar.selectbox(\n",
-    "        \"Pilih Analisis\",\n",
-    "        [\"EDA\", \"Regression\", \"Clustering\", \"Classification\"]\n",
-    "    )\n",
-    "\n",
-    "    # ====================================\n",
-    "    # 3a. Exploratory Data Analysis (EDA)\n",
-    "    # ====================================\n",
-    "    if option == \"EDA\":\n",
-    "        st.header(\"📈 Exploratory Data Analysis\")\n",
-    "\n",
-    "        st.write(\"#### Statistik Deskriptif\")\n",
-    "        st.write(df.describe())\n",
-    "\n",
-    "        st.write(\"#### Distribusi Monthly Charges\")\n",
-    "        fig, ax = plt.subplots()\n",
-    "        sns.histplot(df[\"MonthlyCharges\"], kde=True, ax=ax)\n",
-    "        st.pyplot(fig)\n",
-    "\n",
-    "        st.write(\"#### Churn Count\")\n",
-    "        fig, ax = plt.subplots()\n",
-    "        sns.countplot(x=\"Churn\", data=df, ax=ax)\n",
-    "        st.pyplot(fig)\n",
-    "\n",
-    "    # ====================================\n",
-    "    # 3b. Regression\n",
-    "    # ====================================\n",
-    "    elif option == \"Regression\":\n",
-    "        st.header(\"📉 Regression (Prediksi Monthly Charges)\")\n",
-    "\n",
-    "        X = df_encoded[['tenure']]  # contoh fitur\n",
-    "        y = df_encoded['MonthlyCharges']\n",
-    "\n",
-    "        model = LinearRegression()\n",
-    "        model.fit(X, y)\n",
-    "        y_pred = model.predict(X)\n",
-    "\n",
-    "        st.write(\"R² Score:\", model.score(X, y))\n",
-    "\n",
-    "        fig, ax = plt.subplots()\n",
-    "        ax.scatter(X, y, alpha=0.5)\n",
-    "        ax.plot(X, y_pred, color=\"red\")\n",
-    "        ax.set_xlabel(\"Tenure\")\n",
-    "        ax.set_ylabel(\"Monthly Charges\")\n",
-    "        st.pyplot(fig)\n",
-    "\n",
-    "    # ====================================\n",
-    "    # 3c. Clustering\n",
-    "    # ====================================\n",
-    "    elif option == \"Clustering\":\n",
-    "        st.header(\"👥 Clustering (Customer Segmentation)\")\n",
-    "\n",
-    "        features = df_encoded[['MonthlyCharges', 'tenure']]\n",
-    "        scaler = StandardScaler()\n",
-    "        features_scaled = scaler.fit_transform(features)\n",
-    "\n",
-    "        kmeans = KMeans(n_clusters=3, random_state=42, n_init=10)\n",
-    "        clusters = kmeans.fit_predict(features_scaled)\n",
-    "        df[\"Cluster\"] = clusters\n",
-    "\n",
-    "        st.write(\"### Sample Data dengan Cluster\")\n",
-    "        st.dataframe(df[[\"customerID\", \"MonthlyCharges\", \"tenure\", \"Cluster\"]].head())\n",
-    "\n",
-    "        fig, ax = plt.subplots()\n",
-    "        sns.scatterplot(x=\"tenure\", y=\"MonthlyCharges\", hue=\"Cluster\", data=df, palette=\"Set1\", ax=ax)\n",
-    "        st.pyplot(fig)\n",
-    "\n",
-    "    # ====================================\n",
-    "    # 3d. Classification\n",
-    "    # ====================================\n",
-    "    elif option == \"Classification\":\n",
-    "        st.header(\"🔮 Classification (Prediksi Churn)\")\n",
-    "\n",
-    "        X = df_encoded.drop(columns=[\"customerID\", \"Churn\"])\n",
-    "        y = df_encoded[\"Churn\"]\n",
-    "\n",
-    "        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n",
-    "\n",
-    "        clf = RandomForestClassifier(random_state=42)\n",
-    "        clf.fit(X_train, y_train)\n",
-    "        y_pred = clf.predict(X_test)\n",
-    "\n",
-    "        st.write(\"### Classification Report\")\n",
-    "        st.text(classification_report(y_test, y_pred))\n",
-    "\n",
-    "        st.write(\"### Confusion Matrix\")\n",
-    "        cm = confusion_matrix(y_test, y_pred)\n",
-    "        fig, ax = plt.subplots()\n",
-    "        sns.heatmap(cm, annot=True, fmt=\"d\", cmap=\"Blues\", ax=ax)\n",
-    "        st.pyplot(fig)\n"
-   ]
-  }
- ],
- "metadata": {
-  "kernelspec": {
-   "display_name": "Python 3 (ipykernel)",
-   "language": "python",
-   "name": "python3"
-  },
-  "language_info": {
-   "codemirror_mode": {
-    "name": "ipython",
-    "version": 3
-   },
-   "file_extension": ".py",
-   "mimetype": "text/x-python",
-   "name": "python",
-   "nbconvert_exporter": "python",
-   "pygments_lexer": "ipython3",
-   "version": "3.11.5"
-  }
- },
- "nbformat": 4,
- "nbformat_minor": 5
-}
+import streamlit as st
+import pandas as pd
+import numpy as np
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression, LogisticRegression
+from sklearn.cluster import KMeans
+from sklearn.metrics import accuracy_score, mean_squared_error
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+st.title("📊 Telco Customer Analytics Dashboard")
+
+# ======================
+# LOAD DATA
+# ======================
+@st.cache_data
+def load_data():
+    return pd.read_csv("WA_Fn-UseC_-Telco-Customer-Churn.csv")
+
+df = load_data()
+st.write("### Data Preview")
+st.dataframe(df.head())
+
+# ======================
+# TABS
+# ======================
+tab1, tab2, tab3, tab4 = st.tabs(["📈 Regression", "👥 Clustering", "⚡ Classification", "📊 Dashboard"])
+
+# ======================
+# REGRESSION (Predict MonthlyCharges)
+# ======================
+with tab1:
+    st.subheader("Regression: Predict Monthly Charges")
+
+    # Ambil fitur numerik
+    num_cols = ["tenure", "TotalCharges"]
+    df_reg = df[num_cols + ["MonthlyCharges"]].dropna()
+
+    X = df_reg[num_cols]
+    y = df_reg["MonthlyCharges"]
+
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+    model = Li
