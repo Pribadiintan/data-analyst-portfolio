@@ -40,7 +40,7 @@
     "# ====================================\n",
     "# 2. Upload Dataset\n",
     "# ====================================\n",
-    "uploaded_file = st.file_uploader(\"📂 Upload dataset CSV (Telco Customer Churn)\", type=[\"csv\"])\n",
+    "uploaded_file = st.file_uploader(\"📂 Upload dataset CSV (WA_Fn-UseC_-Telco-Customer-Churn)\", type=[\"csv\"])\n",
     "\n",
     "if uploaded_file:\n",
     "    df = pd.read_csv(uploaded_file)\n",
